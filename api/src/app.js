@@ -1,14 +1,12 @@
 const express = require ('express');
-const morgan = require ('morgan')
+const morgan = require ('morgan');
+const mainRouter = require('./routes');
 
 const server = express();
 
 server.use(morgan('dev'));
 
+server.use(mainRouter)
 
-server.get('/',  (req, res) => {
-    res.status(200).send('ok')
-})
-    
 
 module.exports = server;
