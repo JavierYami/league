@@ -1,9 +1,15 @@
 const {Router} = require('express');
+const {getAllChampions} = require ('./controllers')
 
 const championsRouter = Router();
 
-championsRouter.get('/', (req, res) => { 
-    res.send('NIY: Esta ruta me trae todos los campeones')
+championsRouter.get('/', async (req, res)   => { 
+    try {
+        let champions =  await getAllChampions();
+        res.status(200).json(champions)
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
 });
 
 championsRouter.get('/:championId', (req, res) => { 
